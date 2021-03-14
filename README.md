@@ -2,7 +2,7 @@
 > 📊 Slim Übersicht status bar made for yabai.
 
 ## Dependencies
-- [calm-notifications] <sup>(do not disturb support)</sup>
+- [calm-notifications](https://github.com/vitorgalvao/tiny-scripts/blob/master/calm-notifications) <sup>(do not disturb support)</sup>
 
 ## Installation
 ```
