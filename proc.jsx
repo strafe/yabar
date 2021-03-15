@@ -33,8 +33,8 @@ const render = output => (
 
 const className = {
   top: '0px', // Absolute position (centered).
-  right: 'calc(50% - 375px)',
-  width: '750px', // Maximum width.
+  right: 'calc(50% - 125px)',
+  width: '250px', // Maximum width.
   boxSizing: 'border-box', // Text follows width with padding applied.
   padding: '7px 12px 6px 12px', // Roughly center the widget contents.
   fontFamily: 'CozetteVector', // Font family and sizing.
