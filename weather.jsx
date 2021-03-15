@@ -1,4 +1,5 @@
-import { getDayProgress } from './lib/js/utils.js';
+import { run } from 'uebersicht';
+import { clickEffect, getDayProgress } from './lib/js/utils.js';
 
 // Refresh once every 15 minutes.
 const refreshFrequency = 900000;
@@ -37,14 +38,21 @@ const updateState = (event, previousState) => {
   };
 };
 
-const render = output => (
-  <section>
-    &nbsp;&nbsp;{output.tempC}°
-    <div className='outer'>
-      <div className='inner' style={{width: `${output.precipChance}%`}}></div>
-    </div>
-  </section>
-);
+const render = output => {
+  const onClick = e => {
+    clickEffect(e);
+    run('open "https://wttr.in"');
+  };
+
+  return (
+    <section onClick={onClick}>
+      &nbsp;&nbsp;{output.tempC}°
+      <div className='outer'>
+        <div className='inner' style={{width: `${output.precipChance}%`}}></div>
+      </div>
+    </section>
+  );
+};
 
 const className = {
   top: '0px', // Absolute position.
