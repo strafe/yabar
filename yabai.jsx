@@ -1,5 +1,5 @@
 import { run } from 'uebersicht';
-import { dispatchSpaces } from './lib/js/utils.js'
+import { clickEffect, dispatchSpaces, focusSpace } from './lib/js/utils.js'
 
 // Never refresh (WebSocket handles updates).
 const refreshFrequency = false;
@@ -25,18 +25,24 @@ const updateState = (event, previousState) => {
     return event.data;
 };
 
-const render = output => (
-  <section id="spaces">
-    {output.map(space => (
-      <div className="space">
-        <div className="outer">
-          <div className="inner" style={{width: space.focused ? '100%' : '0%'}}></div>
+const render = output => {
+  const onClick = e => {
+    clickEffect(e);
+  };
+
+  return (
+    <section id="spaces" onClick={onClick}>
+      {output.map(space => (
+        <div className="space" onClick={() => focusSpace(run, space.index)}>
+          <div className="outer">
+            <div className="inner" style={{width: space.focused ? '100%' : '0%'}}></div>
+          </div>
+          {typeof space.name === 'string' ? <span className='icon'>{space.name}</span> : <span className='number'>{space.name}</span>}
         </div>
-        {typeof space.name === 'string' ? <span className='icon'>{space.name}</span> : <span className='number'>{space.name}</span>}
-      </div>
-    ))}
-  </section>
-);
+      ))}
+    </section>
+  );
+};
 
 const className = {
   top: '0px', // Absolute position.
