@@ -1,4 +1,5 @@
-import { interpolateHue, hsvToHex, getDayProgress } from './lib/js/utils.js'
+import { run } from 'uebersicht'
+import { interpolateHue, hsvToHex, getDayProgress, clickEffect } from './lib/js/utils.js'
 
 // Refresh once every 30 seconds.
 const refreshFrequency = 30000;
@@ -6,12 +7,17 @@ const refreshFrequency = 30000;
 const command = () => {};
 
 const render = output => {
+  const onClick = e => {
+    clickEffect(e);
+    run('open -a Calendar');
+  };
+
   const time = new Intl.DateTimeFormat('en-GB', {hour: 'numeric', minute: 'numeric', hour12: false}).format(Date.now());
   const date = new Intl.DateTimeFormat('en-GB', {weekday: 'short', day: '2-digit', month: 'short'}).format(Date.now());
   const progress = getDayProgress();
 
   return (
-    <section>
+    <section onClick={onClick}>
       {date} @ {time}
       <div className='outer'>
         <div className='inner' style={{
