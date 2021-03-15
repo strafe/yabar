@@ -1,3 +1,5 @@
+import { run } from 'uebersicht'
+import { clickEffect } from './lib/js/utils.js'
 import config from './lib/config.js'
 
 // Refresh once every 2 minutes.
@@ -25,17 +27,24 @@ const updateState = event => {
   };
 };
 
-const render = output => (
-  <section>
-    {output.charging ? '' : ''}
-    <div className='outer'>
-      <div className='inner' style={{
-        width: `${output.remaining}%`,
-        backgroundColor: output.color
-      }}></div>
-    </div>
-  </section>
-);
+const render = output => {
+  const onClick = e => {
+    clickEffect(e);
+    run('open /System/Library/PreferencePanes/Battery.prefPane');
+  };
+
+  return (
+    <section onClick={onClick}>
+      {output.charging ? '' : ''}
+      <div className='outer'>
+        <div className='inner' style={{
+          width: `${output.remaining}%`,
+          backgroundColor: output.color
+        }}></div>
+      </div>
+    </section>
+  );
+};
 
 const className = {
   top: '0px', // Absolute position.
