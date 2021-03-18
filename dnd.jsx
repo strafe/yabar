@@ -9,7 +9,11 @@ const initialState = false;
 // Currently using calm-notifications (https://github.com/vitorgalvao/tiny-scripts).
 const command = 'calm-notifications status';
 
-const updateState = event => {
+const updateState = (event, previousState) => {
+  if (!event.output) {
+    return previousState;
+  }
+
   return event.output.trim() === 'on';
 };
 
